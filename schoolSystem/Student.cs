@@ -134,9 +134,11 @@ namespace schoolSystem
 		{
 			Student[] temp;
 			temp = sortStudent(stds);
+			
+
 			for (int i = 0; i < 10; i++)
 			{
-				temp[i].getStudentName();
+				Console.WriteLine(temp[i].getStudentName());
 			}
 		}
 

@@ -18,7 +18,7 @@ namespace schoolSystem
 			: base(studentId, studentName, kunya, gpa, department, birthDate, attendingDate, graduationDate, currentStudingYear,subjects)
 		{
 			scholarshipCountOfStudent++;
-			Console.WriteLine(studentName);
+			//Console.WriteLine(studentName);
 		}
 
 		public override int printCountOfStudent()
