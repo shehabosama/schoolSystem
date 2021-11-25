@@ -14,7 +14,7 @@ namespace schoolSystem
 			scholarshipCountOfStudent++;
 		}
 
-		public ScholarshipStudent(int studentId, string studentName, string kunya, float gpa, string department, string birthDate, string attendingDate, string graduationDate, int currentStudingYear , String[][] subjects) 
+		public ScholarshipStudent(int studentId, string studentName, string kunya, float gpa, string department, string birthDate, string attendingDate, string graduationDate, int currentStudingYear , String[,] subjects) 
 			: base(studentId, studentName, kunya, gpa, department, birthDate, attendingDate, graduationDate, currentStudingYear,subjects)
 		{
 			scholarshipCountOfStudent++;
