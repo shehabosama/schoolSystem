@@ -17,8 +17,8 @@ namespace schoolSystem
 		private int currentStudingYear;
 		private static int countOfStudents = 0;
 		private String[,] subjects;
-		private static int AddEmpIteration = 12;
 		private Student[] students , topTenStudents;
+		private static int AutoIndexing;
 		public void setSubjects(String[,] subjects) { this.subjects = subjects; }
 		public String[,] getSubjects() { return subjects; }
 
@@ -119,11 +119,6 @@ namespace schoolSystem
 			return countOfStudents;
 		}
 
-		public  void addStudent(Student[] std)
-		{
-			throw new NotImplementedException();
-		}
-
 		public  void getStudents()
 		{
 			for (int i = 0; i < students.Length; i++) { 
@@ -135,18 +130,12 @@ namespace schoolSystem
 		{
 			topTenStudents = sortTopTenStudent(students);
 			
-
 			for (int i = 0; i < 10; i++)
 			{
 				Console.WriteLine(topTenStudents[i].getStudentName());
 			}
 		}
-		public static void spreateLine()
-		{
-			Console.WriteLine();
-			Console.WriteLine("--------------------------------------------------------------");
-			Console.WriteLine();
-		}
+		
 		public void getStudentSubjectsAndStatus(int studentNumber)
 		{
 			for (int i = 0; i < students.GetLength(0); i++)
@@ -169,39 +158,21 @@ namespace schoolSystem
 				}
 			}
 		}
-		public static Student[] Re2Dimension(Student[] OldArray, int arr1stDimLength)
-		{
-			// declare a larger array
-			Student[] NewArray = new Student[arr1stDimLength];
-			// determine if we are shrinking or enlarging
-			const int FirstDimension = 0;
-			int xMax = 0;
-			// determine if we are shrinking or enlarging columns
-			if (OldArray.GetUpperBound(FirstDimension) < (arr1stDimLength - 1))
-				xMax = OldArray.GetUpperBound(FirstDimension) + 1; 
-			else
-				xMax = arr1stDimLength;
+		
 
-			for (int x = 0; x < xMax; x++)
-			{
-					NewArray[x] = OldArray[x];
-			}
-			return NewArray;
-		}
-
-		public  void addEmployee(Student[] std)
+		public  void addStudent(Student[] std)
 		{
 			int stdNo = 0;
 			Console.WriteLine("How many Student you want to add ? ");
 			int employee_size = Convert.ToInt32(Console.ReadLine());
-			std = Re2Dimension(std, std.GetLength(0) + employee_size);
-			for (int i = AddEmpIteration; i < std.GetLength(0); i++)
+			std = Array.ConvertAll(Helper.Re2Dimension((Student[])std, std.GetLength(0) + employee_size),o=>(Student)o);
+
+			for (int i = AutoIndexing; i < std.GetLength(0); i++)
 			{
-				
 				std[i] = new Student();
 				Console.WriteLine("Enter The Studnet Number :" + ++stdNo);
-				Console.WriteLine("Student Id Is : " + (AddEmpIteration + 1));
-				std[i].setStudentId(AddEmpIteration + 1);	
+				Console.WriteLine("Student Id Is : " + (AutoIndexing + 1));
+				std[i].setStudentId(AutoIndexing + 1);	
 				Console.WriteLine("Enter Student Name");
 				std[i].setStudentName(Console.ReadLine());
 				Console.WriteLine("Enter Student Birth Date");
@@ -237,7 +208,7 @@ namespace schoolSystem
 				}
 				std[i].setSubjects(temp);
 
-				AddEmpIteration++;
+				AutoIndexing++;
 			}
 			Console.WriteLine("Student Added succesfully...");
 			
@@ -269,6 +240,7 @@ namespace schoolSystem
 		}
 		public void addIntialStudent(Student[] stds) {
 			students = stds;
+			AutoIndexing = students.GetUpperBound(0);
 		}
 
 	}

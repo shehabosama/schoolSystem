@@ -4,32 +4,33 @@ namespace schoolSystem
 {
 	class Program
 	{
-		public static Student[] arr;
-		public static Student std;
-		public static ScholarshipStudent stdShcollerShip;
+		public static Student[] students;
+		public static Teacher[] teachers;
+		public static Student stdRef;
+		public static ScholarshipStudent stdShcollerShipRef;
+		public static FullTimeTeacher fTeacherRef;
+		public static PartTimeTeacher pTeacherRef;
+		public static Teacher teacher;
 		static void Main(string[] args)
 		{
+			//FullTimeTeacher f = new FullTimeTeacher();
+			//PartTimeTeacher p = new PartTimeTeacher();
+		
 			init();
 			//Console.WriteLine(obj.GetType()==obj2.GetType());
 			//for (int i = 0; i < arr.Length; i++)
-			//		Console.WriteLine(arr[i].GetType() == new ScholarshipStudent().GetType());
-
-
+			//Console.WriteLine(arr[i].GetType() == new ScholarshipStudent().GetType());
 			//ScholarshipStudent st = (ScholarshipStudent)arr[3];
 			//Console.WriteLine(arr[0].printCountOfStudent()- st.printCountOfStudent());
 			//Console.WriteLine(st.printCountOfStudent());
-			//Student stt = new Student();
+			//Student stt = new Student();S
 			//stt.getTopTenStudents(arr);
 			//Student.addEmployee(arr);
 	
 		}
 
 		public static void init() {
-
-			
-		
-
-			arr =new Student[12] {
+			students =new Student[12] {
 				new Student(1, "mohmed", "sdfsd", 1.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
 					{ "introduction to cs","pass"},
 					{ "operating system", "pass" } }) ,
@@ -79,9 +80,17 @@ namespace schoolSystem
 					 { "operating system", "pass" },
 					 { "information system", "pass" }})
 					};
-			stdShcollerShip = (ScholarshipStudent)arr[3];
-			std = arr[0];
-			std.addIntialStudent(arr);
+			teachers = new Teacher[2] { new PartTimeTeacher(1, "tamer", "salama", new String[]{ "cs" ,"Is" , "Os"},20) ,
+										new FullTimeTeacher(1, "tamer", "salama", 343, new String[]{ "cs" ,"Is" , "Os"},20)};
+
+
+
+			stdShcollerShipRef = (ScholarshipStudent)students[3];
+			stdRef = students[0];
+			teacher = teachers[1];
+			pTeacherRef = (PartTimeTeacher)teachers[0];
+			stdRef.addIntialStudent(students);
+			teacher.addIntialTeachers(teachers);
 			programOptions();
 			programOptionsImplementation(Console.ReadLine());
 		}
@@ -96,41 +105,45 @@ namespace schoolSystem
 			Console.WriteLine("6 - Add Teacher");
 			Console.WriteLine("7 - Print the salary one of teachers");
 			Console.WriteLine("8 - Print Counr of student currently exist in the school");
-
 		}
 		private static void programOptionsImplementation(String option) {
 			switch (option)
 			{
 				case "1":
 					//Print All Students currently exist in the school
-					std.getStudents();
+					stdRef.getStudents();
 					break;
 				case "2":
 					// Write the number of student and to get his degrees
 					Console.WriteLine("Please Enter Th number of students : ");
-					std.getStudentSubjectsAndStatus(Convert.ToInt32(Console.ReadLine()));
+					stdRef.getStudentSubjectsAndStatus(Convert.ToInt32(Console.ReadLine()));
 					break;
 				case "3":
 					// print all the students that have scholarship
-					Console.WriteLine("The count of Normal Student is : " + stdShcollerShip.printCountOfStudent());
+					Console.WriteLine("The count of Normal Student is : " + stdShcollerShipRef.printCountOfStudent());
 					break;
 				case "4":
 					// get Top ten Student's degrees
-					std.getTopTenStudents();
+					stdRef.getTopTenStudents();
 					break;
 				case "5":
 					// Add Student
-					std.addStudent(arr);
+					stdRef.addStudent(students);
 					break;
 				case "6":
 					// Add Teacher
+					Console.WriteLine("What Type of Teacher you want to add ? ");
+					Console.WriteLine("1 -Basic Teacher ");
+					Console.WriteLine("2 -PartTime Teacher ");
+					int type = Convert.ToInt32(Console.ReadLine());
+					teacher.addTeacher(teachers,type);
 					break;
 				case "7":
 					// Print the salary one of teachers
 					break;
 				case "8":
 					// Print the salary one of teachers
-					Console.WriteLine("The count of Normal Student is : "+(arr[0].printCountOfStudent() - stdShcollerShip.printCountOfStudent()));
+					Console.WriteLine("The count of Normal Student is : "+(students[0].printCountOfStudent() - stdShcollerShipRef.printCountOfStudent()));
 					break;
 				default:
 					Console.Clear();

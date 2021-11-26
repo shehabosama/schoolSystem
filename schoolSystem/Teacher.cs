@@ -9,18 +9,44 @@ namespace schoolSystem
 		private int teacherId;
 		private String teacherName;
 		private String kunya;
-		private float teacherSalary;
-		private String[] supjects;
+		private String[] subjects;
+		private Teacher[] teachers;
+		private TeacherOperations pTeacher, fTeacher;
+		
+		public Teacher() { }
+		public Teacher(int teacherId, string teacherName, string kunya, string[] subjects)
+		{
+			this.teacherId = teacherId;
+			this.teacherName = teacherName;
+			this.kunya = kunya;
+			this.subjects = subjects;
+			pTeacher = new PartTimeTeacher();
+			fTeacher = new FullTimeTeacher();
+
+		}
+
 		public void setTeacherId(int teacherId) { this.teacherId = teacherId; }
 		public int getTeacherID() { return teacherId; }
 		public void setTeacherName(String teacherName) { this.teacherName = teacherName; }
 		public String getTeacherName() { return teacherName; }
 		public void setTeacherKuyna(String teacherKunya) {this.kunya = teacherKunya;}
 		public String getTeacherkunya() { return kunya; }
-		public void setTeacherSalary(float teacherSalary) { this.teacherSalary = teacherSalary; }
-		public float getTeacherSalary() { return teacherSalary; }
-		public void setTeacherSubjects(String[] teacherSubjects) {this.supjects = teacherSubjects;}
-		public String[] getTeacherSupjects() { return supjects; }
+		public void setTeacherSubjects(String[] teacherSubjects) {this.subjects = teacherSubjects;}
+		public String[] getTeacherSupjects() { return subjects; }
+		
+		public void addTeacher(Teacher[] teachers , int type) {
+			
+			if (type == 1)
+				this.teachers = fTeacher.addTeacher(teachers);
+			else
+				this.teachers = pTeacher.addTeacher(teachers);
+
+			getTeachers();
+		}
+		public void getTeachers() {
+			for (int i = 0; i < teachers.GetLength(0); i++)
+				Console.WriteLine(teachers[i].getTeacherName());
+		}
 
 	}
 }
