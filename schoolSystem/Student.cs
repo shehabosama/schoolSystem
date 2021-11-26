@@ -124,6 +124,8 @@ namespace schoolSystem
 			for (int i = 0; i < students.Length; i++) { 
 				Console.WriteLine(students[i].getStudentName());
 			}
+			Helper.goBackToMainMenu();
+
 		}
 		
 		public  void getTopTenStudents()
@@ -134,6 +136,8 @@ namespace schoolSystem
 			{
 				Console.WriteLine(topTenStudents[i].getStudentName());
 			}
+
+			Helper.goBackToMainMenu();
 		}
 		
 		public void getStudentSubjectsAndStatus(int studentNumber)
@@ -157,6 +161,7 @@ namespace schoolSystem
 					}
 				}
 			}
+			Helper.goBackToMainMenu();
 		}
 		
 
@@ -213,7 +218,7 @@ namespace schoolSystem
 			Console.WriteLine("Student Added succesfully...");
 			
 			students = std;
-			//	goBackIntoMainMenu(2);
+			Helper.goBackToMainMenu();
 		}
 		private Student[] sortTopTenStudent(Student[] stds) {
 			Student temp;

@@ -6,7 +6,7 @@ namespace schoolSystem
 {
 	interface TeacherOperations
 	{
-		void getSpecificTeacherSalary(int teacherId);
+		float getSpecificTeacherSalary(int teacherId);
 		Teacher[] addTeacher(Teacher[] teacher);
 	}
 }

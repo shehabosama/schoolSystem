@@ -24,30 +24,47 @@ namespace schoolSystem
 			return countOfHours * 5;
 		}
 
-		public void getSpecificTeacherSalary(int teacherId)
+		public float getSpecificTeacherSalary(int teacherId)
 		{
+			return calculateTheSallary();
 			Console.WriteLine("getSpecificTeacherSalary : PartTimeTeacher");
 		}
 
-		public Teacher[] addTeacher(Teacher[] teachers)
+	    public Teacher[] addTeacher(Teacher[] teachers)
 		{
-
-			for (int i = AutoIndexing; i < teachers.GetLength(0); i++) {
-				teachers[i] = new PartTimeTeacher();
-				teachers[i].setTeacherId(Convert.ToInt32(Console.ReadLine()));
-				teachers[i].setTeacherName(Console.ReadLine());
-				teachers[i].setTeacherKuyna(Console.ReadLine());
+			int teacherNo = 0;
+			Console.WriteLine("How many Teacher you want to add ? ");
+			int teacherSize = Convert.ToInt32(Console.ReadLine());
+			teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + teacherSize), o => (Teacher)o);
+			
+			for (int i = AutoIndexing; i < teachers.GetLength(0); i++)
+			{
+				AutoIndexing = teachers.GetUpperBound(0);
+				Console.WriteLine("Enter The Teacher Number :" + ++teacherNo);
+				Console.WriteLine("Teacher Id Is : " + (AutoIndexing + 1));
+				
+				Console.WriteLine("Enter Teacher Name");
+				String teacherName = Console.ReadLine();
+				Console.WriteLine("Enter Teacher kunya");
+				String kunya = Console.ReadLine();
+				
+				Console.WriteLine("How many hours he worked in part time ?");
+				float countOfHours = (float)Convert.ToDouble(Console.ReadLine());
+				Console.WriteLine("How many subjects he teach?");
 				int countOfSubjects = Convert.ToInt32(Console.ReadLine());
 				String[] temp = new String[countOfSubjects];
-				for (int j = 0; j < countOfSubjects; j++) {
+				for (int j = 0; j < countOfSubjects; j++)
+				{
+					Console.WriteLine("Enter Subject Name # " + j + 1);
+
 					temp[j] = Console.ReadLine();
 				}
-				teachers[i].setTeacherSubjects(temp);
+				teachers[i] = new PartTimeTeacher(AutoIndexing + 1, teacherName, kunya, temp, countOfHours);
 			}
-			this.pTeachers =(PartTimeTeacher[]) teachers;
-			return pTeachers;
+
+			return teachers;
 		}
-		
+
 	}
 
 }

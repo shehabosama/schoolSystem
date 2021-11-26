@@ -8,8 +8,6 @@ namespace schoolSystem
 		public static Teacher[] teachers;
 		public static Student stdRef;
 		public static ScholarshipStudent stdShcollerShipRef;
-		public static FullTimeTeacher fTeacherRef;
-		public static PartTimeTeacher pTeacherRef;
 		public static Teacher teacher;
 		static void Main(string[] args)
 		{
@@ -81,32 +79,22 @@ namespace schoolSystem
 					 { "information system", "pass" }})
 					};
 			teachers = new Teacher[2] { new PartTimeTeacher(1, "tamer", "salama", new String[]{ "cs" ,"Is" , "Os"},20) ,
-										new FullTimeTeacher(1, "tamer", "salama", 343, new String[]{ "cs" ,"Is" , "Os"},20)};
+										new FullTimeTeacher(2, "tamer", "salama", 343, new String[]{ "cs" ,"Is" , "Os"},20)};
 
 
 
 			stdShcollerShipRef = (ScholarshipStudent)students[3];
 			stdRef = students[0];
 			teacher = teachers[1];
-			pTeacherRef = (PartTimeTeacher)teachers[0];
 			stdRef.addIntialStudent(students);
-			teacher.addIntialTeachers(teachers);
-			programOptions();
+			teacher.initialTeachers(teachers);
+			Helper.programOptions();
+			Helper.spreateLine();
 			programOptionsImplementation(Console.ReadLine());
 		}
 
-		private static void programOptions()
-		{
-			Console.WriteLine("1 - Print All Students currently exist in the school");
-			Console.WriteLine("2 - Write the number of student and to get his degrees");
-			Console.WriteLine("3 - print all the students that have scholarship");
-			Console.WriteLine("4 - get Top ten Student's degrees");
-			Console.WriteLine("5 - Add Student");
-			Console.WriteLine("6 - Add Teacher");
-			Console.WriteLine("7 - Print the salary one of teachers");
-			Console.WriteLine("8 - Print Counr of student currently exist in the school");
-		}
-		private static void programOptionsImplementation(String option) {
+	
+		public static void programOptionsImplementation(String option) {
 			switch (option)
 			{
 				case "1":
@@ -120,7 +108,8 @@ namespace schoolSystem
 					break;
 				case "3":
 					// print all the students that have scholarship
-					Console.WriteLine("The count of Normal Student is : " + stdShcollerShipRef.printCountOfStudent());
+					Console.WriteLine("The count of Schollership Students is : " + stdShcollerShipRef.printCountOfStudent());
+					Helper.goBackToMainMenu();
 					break;
 				case "4":
 					// get Top ten Student's degrees
@@ -133,13 +122,16 @@ namespace schoolSystem
 				case "6":
 					// Add Teacher
 					Console.WriteLine("What Type of Teacher you want to add ? ");
-					Console.WriteLine("1 -Basic Teacher ");
-					Console.WriteLine("2 -PartTime Teacher ");
+					Console.WriteLine("1 -Full Time Teacher ");
+					Console.WriteLine("2 -Part Time Teacher ");
 					int type = Convert.ToInt32(Console.ReadLine());
 					teacher.addTeacher(teachers,type);
 					break;
 				case "7":
 					// Print the salary one of teachers
+					Console.WriteLine("Please Enter Teacher Id : ");
+					int teacherId = Convert.ToInt32(Console.ReadLine());
+					teacher.getSpecificTeacherSalary(teacherId);
 					break;
 				case "8":
 					// Print the salary one of teachers
@@ -148,7 +140,7 @@ namespace schoolSystem
 				default:
 					Console.Clear();
 					Console.WriteLine("*****************Please Select one of these numbers**************\n\n");
-					programOptions();
+					Helper.programOptions();
 					programOptionsImplementation(Console.ReadLine());
 					break;
 			}

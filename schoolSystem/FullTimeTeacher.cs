@@ -29,26 +29,27 @@ namespace schoolSystem
 			return salaryOfMonth + calcCountOfHours;
 		}
 
-		public void getSpecificTeacherSalary(int teacherId)
+		public float getSpecificTeacherSalary(int teacherId)
 		{
-			Console.WriteLine("getSpecificTeacherSalary : FullTimeTeacher");
+			return calculateTheSallary();
+			
 		}
 
 		public Teacher[] addTeacher(Teacher[] teachers)
 		{
+			AutoIndexing = teachers.GetUpperBound(0);
 			int teacherNo = 0;
-			Console.WriteLine("How many Student you want to add ? ");
+			Console.WriteLine("How many Teacher you want to add ? ");
 			int teacherSize = Convert.ToInt32(Console.ReadLine());
 			teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + teacherSize), o => (Teacher)o);
 			Console.WriteLine(teachers[0].getTeacherName());	
 			for (int i = AutoIndexing; i < teachers.GetLength(0); i++)
 			{
-				Console.WriteLine("Enter The Studnet Number :" + ++teacherNo);
-				Console.WriteLine("Student Id Is : " + (AutoIndexing + 1));
-				Console.WriteLine("Enter Teacher ID");
+				Console.WriteLine("Enter The Teacher Number :" + ++teacherNo);
+				Console.WriteLine("Teacher Id Is : " + (AutoIndexing + 1));
 				Console.WriteLine("Enter Teacer Name");
 				String teacherName = Console.ReadLine();
-				Console.WriteLine("Enter Teacher kuna");
+				Console.WriteLine("Enter Teacher kunya");
 				String kunya = Console.ReadLine(); 
 				Console.WriteLine("Enter Salary");
 				float salary = (float)Convert.ToDouble(Console.ReadLine());
@@ -60,7 +61,6 @@ namespace schoolSystem
 				for (int j = 0; j < countOfSubjects; j++)
 				{
 					Console.WriteLine("Enter Subject Name # "+j+1);
-
 					temp[j] = Console.ReadLine();
 				}
 				teachers[i] = new FullTimeTeacher(AutoIndexing + 1 , teacherName , kunya , salary , temp , countOfHours);
@@ -68,5 +68,6 @@ namespace schoolSystem
 			
 			return teachers;
 		}
+		
 	}
 }
