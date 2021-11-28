@@ -115,7 +115,21 @@ namespace schoolSystem
 				case "4":
 					// Write the number of student and to get his degrees
 					Console.WriteLine("Please Enter Th number of students : ");
-					stdRef.getStudentSubjectsAndStatus(Convert.ToInt32(Console.ReadLine()));
+					try
+					{
+						stdRef.getStudentSubjectsAndStatus(Convert.ToInt32(Console.ReadLine()));
+
+					}
+					catch (FormatException ex)
+					{
+						Console.WriteLine("Invalid Format Please Try again.");
+						programOptionsImplementation(option);
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine("Error occure Please Try again.");
+						programOptionsImplementation(option);
+					}
 					break;
 				case "5":
 					// Print Count of scholarship student currently exist in the school
@@ -137,22 +151,59 @@ namespace schoolSystem
 					Console.WriteLine("What Type of Student you want to add ? ");
 					Console.WriteLine("1 -Credit Student ");
 					Console.WriteLine("2 -Schollership Student ");
-					int Studenttype = Convert.ToInt32(Console.ReadLine());
-					stdRef.addStudent(students, Studenttype);
+					try
+					{
+						int Studenttype = Convert.ToInt32(Console.ReadLine());
+						stdRef.addStudent(students, Studenttype);
+					}
+					catch (FormatException ex)
+					{
+						Console.WriteLine("Invalid Format Please Try again.");
+						programOptionsImplementation(option);
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine("Error occure Please Try again.");
+						programOptionsImplementation(option);
+					}
 					break;
 				case "9":
 					// Add Teacher
 					Console.WriteLine("What Type of Teacher you want to add ? ");
 					Console.WriteLine("1 -Full Time Teacher ");
 					Console.WriteLine("2 -Part Time Teacher ");
-					int Teachertype = Convert.ToInt32(Console.ReadLine());
-					teacher.addTeacher(teachers, Teachertype);
+					try {
+						int Teachertype = Convert.ToInt32(Console.ReadLine());
+						teacher.addTeacher(teachers, Teachertype);
+					} catch (FormatException ex) {
+						Console.WriteLine("Invalid Format Please Try again.");
+						programOptionsImplementation(option);
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine("Error occure Please Try again.");
+						programOptionsImplementation(option);
+					}
+
 					break;
 				case "10":
 					// Print the salary one of teachers
 					Console.WriteLine("Please Enter Teacher Id : ");
-					int teacherId = Convert.ToInt32(Console.ReadLine());
-					teacher.getSpecificTeacherSalary(teacherId);
+					try
+					{
+						int teacherId = Convert.ToInt32(Console.ReadLine());
+						teacher.getSpecificTeacherSalary(teacherId);
+					}
+					catch (FormatException ex)
+					{
+						Console.WriteLine("Invalid Format Please Try again.");
+						programOptionsImplementation(option);
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine("Error occure Please Try again.");
+						programOptionsImplementation(option);
+					}
 					break;
 				case "11":
 					// get teachers

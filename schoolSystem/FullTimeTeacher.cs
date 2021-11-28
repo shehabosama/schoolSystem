@@ -36,33 +36,62 @@ namespace schoolSystem
 
 		public Teacher[] addTeacher(int lastIndex)
 		{
-			Teacher[] teachers; 
+			Teacher[] teachers;
+			int teacherSize = 0;
 			int teacherNo = 0;
 			Console.WriteLine("How many Teacher you want to add ? ");
-			int teacherSize = Convert.ToInt32(Console.ReadLine());
-			teachers = new Teacher[teacherSize];
-			//teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + teacherSize), o => (Teacher)o);
-			for (int i = 0; i < teacherSize; i++)
+			try
 			{
-				Console.WriteLine("Enter The Teacher Number :" + ++teacherNo);
-				Console.WriteLine("Teacher Id Is : " + (lastIndex + 1));
-				Console.WriteLine("Enter Teacer Name");
-				String teacherName = Console.ReadLine();
-				Console.WriteLine("Enter Teacher kunya");
-				String kunya = Console.ReadLine(); 
-				Console.WriteLine("Enter Salary");
-				float salary = (float)Convert.ToDouble(Console.ReadLine());
-				Console.WriteLine("How many hours he worked in part time ?");
-				float countOfHours = (float)Convert.ToDouble(Console.ReadLine());
-				Console.WriteLine("How many subjects he teach?");
-				int countOfSubjects = Convert.ToInt32(Console.ReadLine());
+				teacherSize = Convert.ToInt32(Console.ReadLine());
+
+			}
+			catch (FormatException ex)
+			{
+				Console.WriteLine("Invaild Foramt Please Try again");
+				addTeacher(lastIndex);
+			}
+			//	teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + teacherSize), o => (Teacher)o);
+			teachers = new Teacher[teacherSize];
+			for (int i = 0; i < teachers.GetLength(0); i++)
+			{
+				String teacherName = "";
+				String kunya = "";
+				float countOfHours = 0.0f;
+				int countOfSubjects = 0;
+				double salary = 0.0;
+				try
+				{
+					Console.WriteLine("Enter The Teacher Number :" + ++teacherNo);
+					Console.WriteLine("Teacher Id Is : " + (lastIndex + 1));
+					Console.WriteLine("Enter Teacher Name");
+					teacherName = Console.ReadLine();
+					Console.WriteLine("Enter Teacher kunya");
+					kunya = Console.ReadLine();
+					Console.WriteLine("Enter Teacher Salary");
+					salary = Convert.ToDouble(Console.ReadLine());
+					Console.WriteLine("How many hours he worked in part time ?");
+					countOfHours = (float)Convert.ToDouble(Console.ReadLine());
+					Console.WriteLine("How many subjects he teach?");
+					countOfSubjects = Convert.ToInt32(Console.ReadLine());
+
+				}
+				catch (FormatException ex)
+				{
+					Console.WriteLine("Invaild Foramt Please Try again");
+					addTeacher(lastIndex);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("Error occure Please Try again");
+					addTeacher(lastIndex);
+				}
 				String[] temp = new String[countOfSubjects];
 				for (int j = 0; j < countOfSubjects; j++)
 				{
 					Console.WriteLine("Enter Subject Name # "+j+1);
 					temp[j] = Console.ReadLine();
 				}
-				teachers[i] = new FullTimeTeacher(lastIndex + 1 , teacherName , kunya , salary , temp , countOfHours);
+				teachers[i] = new FullTimeTeacher(lastIndex + 1 , teacherName , kunya , (float)salary , temp , countOfHours);
 				lastIndex++;
 			}
 			

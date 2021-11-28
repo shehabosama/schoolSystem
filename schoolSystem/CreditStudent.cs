@@ -125,34 +125,65 @@ namespace schoolSystem
 		{
 
 			Student[] std;
+			int studentSize = 0;
 			int stdNo = 0;
-			Console.WriteLine("How many Student you want to add ?  " );
-			int studentSize = Convert.ToInt32(Console.ReadLine());
-			//std = Array.ConvertAll(Helper.Re2Dimension((Student[])std, std.GetLength(0) + studentSize), o => (Student)o);
+			Console.WriteLine("How many Student you want to add ? ");
+			try
+			{
+				studentSize = Convert.ToInt32(Console.ReadLine());
+			}
+			catch (FormatException ex)
+			{
+				Console.WriteLine("Not a valid format. Please try again.");
+				addStudent(lastIndex);
+			}
+			//	std = Array.ConvertAll(Helper.Re2Dimension((Student[])std, std.GetLength(0) + studentSize), o => (Student)o);
+
 			std = new Student[studentSize];
 			for (int i = 0; i < studentSize; i++)
 			{
-				//Console.WriteLine(AutoIndexing + " " + std.GetLength(0));
-				Console.WriteLine("Enter The Studnet Number :" + ++stdNo);
-				Console.WriteLine("Student Id Is : " + (lastIndex + 1));
-				Console.WriteLine("Enter Student Name");
-				String studentName = Console.ReadLine();
-				Console.WriteLine("Enter Student Kunya");
-				String kunya = Console.ReadLine();
-				Console.WriteLine("Enter Student Birth Date");
-				String StudentBirthDate = Console.ReadLine();
-				Console.WriteLine("Enter Student Attending Date");
-				String StudentAttendingDate = Console.ReadLine();
-				Console.WriteLine("Enter Student Current Studying Year");
-				int currentStudyingYear = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Enter Student Department");
-				String department = Console.ReadLine();
-				Console.WriteLine("Enter Stuent Jpa");
-				float jpa = (float)Convert.ToDouble(Console.ReadLine());
-				Console.WriteLine("Enter Student Graduation Date");
-				String graduationDate = Console.ReadLine();
-				Console.WriteLine("Enter how many subjects it has?");
-				int subjectCount = Convert.ToInt32(Console.ReadLine());
+				String studentName = "";
+				String kunya = "";
+				String StudentBirthDate = "";
+				String StudentAttendingDate = "";
+				int currentStudyingYear = 0;
+				String department = "";
+				int subjectCount = 0; float jpa = 0.0f;
+				String graduationDate = "";
+				try
+				{
+					Console.WriteLine("Enter The Studnet Number :" + ++stdNo);
+					Console.WriteLine("Student Id Is : " + (lastIndex + 1));
+					Console.WriteLine("Enter Student Name");
+					studentName = Console.ReadLine();
+					Console.WriteLine("Enter Student Kunya");
+					kunya = Console.ReadLine();
+					Console.WriteLine("Enter Student Birth Date");
+					StudentBirthDate = Console.ReadLine();
+					Console.WriteLine("Enter Student Attending Date");
+					StudentAttendingDate = Console.ReadLine();
+					Console.WriteLine("Enter Student Current Studying Year");
+					currentStudyingYear = Convert.ToInt32(Console.ReadLine());
+					Console.WriteLine("Enter Student Department");
+					department = Console.ReadLine();
+					Console.WriteLine("Enter Stuent Jpa");
+					jpa = (float)Convert.ToDouble(Console.ReadLine());
+					Console.WriteLine("Enter Student Graduation Date");
+					graduationDate = Console.ReadLine();
+					Console.WriteLine("Enter how many subjects it has?");
+					subjectCount = Convert.ToInt32(Console.ReadLine());
+				}
+				catch (FormatException ex)
+				{
+					Console.WriteLine("Not a valid format. Please try again.");
+					addStudent(lastIndex);
+
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("Error occurred! Please try again.");
+					addStudent(lastIndex);
+				}
 				String[,] temp = new string[subjectCount, 2];
 				for (int sbjR = 0; sbjR < subjectCount; sbjR++)
 				{
