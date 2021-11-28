@@ -7,6 +7,6 @@ namespace schoolSystem
 	interface TeacherOperations
 	{
 		float getSpecificTeacherSalary(int teacherId);
-		Teacher[] addTeacher(Teacher[] teacher);
+		Teacher[] addTeacher(int lastIndex);
 	}
 }

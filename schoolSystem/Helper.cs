@@ -25,30 +25,56 @@ namespace schoolSystem
 			}
 			return NewArray;
 		}
-		public static void spreateLine()
+		public static void spreateLine(int typeOfDesign)
 		{
-			Console.WriteLine();
-			Console.WriteLine("=======================================================================");
-			Console.WriteLine();
+			if (typeOfDesign == 1)
+			{
+				Console.WriteLine();
+				Console.WriteLine("=======================================================================");
+				Console.WriteLine();
+			}
+			else if (typeOfDesign == 2) {
+				Console.WriteLine();
+				Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+				Console.WriteLine();
+			}
+			else if (typeOfDesign == 3)
+			{
+				Console.WriteLine();
+				Console.WriteLine("````````````````````````````````````````````````````````````````````````");
+				Console.WriteLine();
+			}
+			else if (typeOfDesign == 4)
+			{
+				Console.WriteLine();
+				Console.WriteLine("#########################################################################");
+				Console.WriteLine();
+			}
 		}
 
 		public static void programOptions()
 		{
+			Console.WriteLine("\n~~~~~~~~~~~~~~~~~~~~~Select Number of operation~~~~~~~~~~~~~~~~~~~~~~~~~~ \n\n");
 			Console.WriteLine("1 - Print All Students currently exist in the school");
-			Console.WriteLine("2 - Write the number of student and to get his degrees");
-			Console.WriteLine("3 - print all the students that have scholarship");
-			Console.WriteLine("4 - get Top ten Student's degrees");
-			Console.WriteLine("5 - Add Student");
-			Console.WriteLine("6 - Add Teacher");
-			Console.WriteLine("7 - Print the salary one of teachers");
-			Console.WriteLine("8 - Print Counr of student currently exist in the school");
+			Console.WriteLine("2 - Print Credit Student currently exist in the school");
+			Console.WriteLine("3 - Print Schollership Student currently exist in the school");
+			Console.WriteLine("4 - Write the number of student and to get his degrees");
+			Console.WriteLine("5 - Print Count of scholarship student currently exist in the school");
+			Console.WriteLine("6 - Print Count of Credit students currently exist in the school");
+			Console.WriteLine("7 - get Top ten Student's degrees");
+			Console.WriteLine("8 - Add Student");
+			Console.WriteLine("9 - Add Teacher");
+			Console.WriteLine("10- Print the salary one of teachers");
+			Console.WriteLine("11 - Print All Teachers");
+			
+
 		}
 		public static void goBackToMainMenu() {
-			spreateLine();
+			spreateLine(1);
 			Console.WriteLine("Press Enter To Go To The Main Menu");
 			Console.ReadLine();
 			Helper.programOptions();
-			spreateLine();
+			spreateLine(1);
 			Program.programOptionsImplementation(Console.ReadLine());
 		}
 	}

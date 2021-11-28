@@ -4,7 +4,7 @@ using System.Text;
 
 namespace schoolSystem
 {
-	class Student : StdOperationInerface
+	class Student
 	{
 		private int studentId;
 		private String studentName;
@@ -17,8 +17,9 @@ namespace schoolSystem
 		private int currentStudingYear;
 		private static int countOfStudents = 0;
 		private String[,] subjects;
-		private Student[] students , topTenStudents;
-		private static int AutoIndexing;
+		private static Student[] students , topTenStudents;
+		private StdOperationInerface cStudnt, sStudnt;
+		private static int  AutoInexing =12;
 		public void setSubjects(String[,] subjects) { this.subjects = subjects; }
 		public String[,] getSubjects() { return subjects; }
 
@@ -36,11 +37,13 @@ namespace schoolSystem
 			this.currentStudingYear = currentStudingYear;
 			this.subjects = subjects;
 			countOfStudents++;
+			cStudnt = new CreditStudent();
+			sStudnt = new ScholarshipStudent();
 		}
 
 		public Student()
 		{
-			countOfStudents++;
+			
 		}
 
 		public void setStudentId(int studentId)
@@ -119,22 +122,55 @@ namespace schoolSystem
 			return countOfStudents;
 		}
 
-		public  void getStudents()
+		public  void getStudents(int studentType)
 		{
-			for (int i = 0; i < students.Length; i++) { 
-				Console.WriteLine(students[i].getStudentName());
+			if (studentType == 1)
+			{
+				cStudnt.getStudents(students);
+			}
+			else if (studentType == 2)
+			{
+				sStudnt.getStudents(students);
+			}
+			else if (studentType == 3) { 
+			for (int i = 0; i < students.Length; i++) {
+					bool checkType = students[i].GetType().ToString().Equals("schoolSystem.ScholarshipStudent");
+					string type = checkType ? "Scholarship Student" : "Credit Student";
+				Console.WriteLine(
+					  "\nStudent Type      : " + type
+					+ "\nStudent ID        : " + students[i].getStudentId()
+					+ "\nStudent Name      : " + students[i].getStudentName()
+					+ "\nStudent B. Date   : " + students[i].getStudentBirthDate()
+					+ "\nStudent G. Date   : " + students[i].getStudentGraduationDate()
+				    + "\nStudent Department: " + students[i].getStudentDepartment()
+					+ "\nStudent GPA       : " + students[i].getStudentGpa());
+				Helper.spreateLine(2);
+			}
+			
 			}
 			Helper.goBackToMainMenu();
-
 		}
 		
 		public  void getTopTenStudents()
 		{
 			topTenStudents = sortTopTenStudent(students);
-			
 			for (int i = 0; i < 10; i++)
 			{
-				Console.WriteLine(topTenStudents[i].getStudentName());
+				Console.WriteLine("Student Name : "+topTenStudents[i].getStudentName() 
+					+"\nStudent GPA  : "+topTenStudents[i].getStudentGpa() );
+				Helper.spreateLine(2);
+				for (int sbjR = 0; sbjR < topTenStudents[i].getSubjects().GetLength(0); sbjR++)
+				{
+					for (int sbjC = 0; sbjC < 2; sbjC++)
+					{
+						if(sbjC == 0)
+						Console.WriteLine("Student subject   : "+topTenStudents[i].getSubjects()[sbjR,0]);
+						else
+						Console.WriteLine("Status of subject : " + topTenStudents[i].getSubjects()[sbjR, 1]+"\n");
+
+					}
+				}
+				Helper.spreateLine(2);
 			}
 
 			Helper.goBackToMainMenu();
@@ -147,7 +183,8 @@ namespace schoolSystem
 
 				if (students[i].getStudentId() == studentNumber)
 				{
-					Console.WriteLine("Student Name : " + students[i].getStudentName());
+					Console.WriteLine("Student Name : " + students[i].getStudentName()
+						+"\n\n"+ "Subjects that he passed in : " + "\n");
 					for (int sbjR = 0; sbjR < students[i].getSubjects().GetLength(0); sbjR++)
 					{
 						
@@ -155,7 +192,8 @@ namespace schoolSystem
 						{
 							
 							Console.WriteLine("Subject Name : "+ students[i].getSubjects()[sbjR, 0]);
-							Console.WriteLine("degree : "+students[i].getSubjects()[sbjR,1]);
+							Console.WriteLine("degree : "+students[i].getSubjects()[sbjR,1]+"\n");
+							
 						}
 
 					}
@@ -165,60 +203,35 @@ namespace schoolSystem
 		}
 		
 
-		public  void addStudent(Student[] std)
+		public  void addStudent(Student[] std , int type)
 		{
-			int stdNo = 0;
-			Console.WriteLine("How many Student you want to add ? ");
-			int employee_size = Convert.ToInt32(Console.ReadLine());
-			std = Array.ConvertAll(Helper.Re2Dimension((Student[])std, std.GetLength(0) + employee_size),o=>(Student)o);
 
-			for (int i = AutoIndexing; i < std.GetLength(0); i++)
+			if (type == 1)
 			{
-				std[i] = new Student();
-				Console.WriteLine("Enter The Studnet Number :" + ++stdNo);
-				Console.WriteLine("Student Id Is : " + (AutoIndexing + 1));
-				std[i].setStudentId(AutoIndexing + 1);	
-				Console.WriteLine("Enter Student Name");
-				std[i].setStudentName(Console.ReadLine());
-				Console.WriteLine("Enter Student Birth Date");
-				std[i].setStudentBirthDate(Console.ReadLine());	
-				Console.WriteLine("Enter Student Attending Date");
-				std[i].setStudentAttendingDate(Console.ReadLine());
-				Console.WriteLine("Enter Student Current Studying Year");
-				std[i].setStudentCurrentStudyingYear(Convert.ToInt32(Console.ReadLine()));
-				Console.WriteLine("Enter Student Department");
-				std[i].setStudentDepartment(Console.ReadLine());
-				Console.WriteLine("Enter Stuent Jpa");
-				std[i].setStudentGpa((float)Convert.ToDouble(Console.ReadLine()));
-				Console.WriteLine("Enter Student Graduation Date");
-				std[i].setStudentGraduationDate(Console.ReadLine());
-				Console.WriteLine("Enter Student Kunya");
-				std[i].setStudentKunya(Console.ReadLine());
-				Console.WriteLine("Enter how many subjects it has?");
-				int subjectCount = Convert.ToInt32(Console.ReadLine());
-				String[,] temp = new string[subjectCount , 2];
-				for (int sbjR = 0; sbjR < subjectCount; sbjR++) {
-					for (int sbjC = 0; sbjC < 2; sbjC++) {
-						if (sbjC == 0)
-						{
-							Console.WriteLine("Enter the student subject");
-							temp[sbjR, 0] = Console.ReadLine();
-						}
-						else
-						{
-							Console.WriteLine("Enter if it pass or fail");
-							temp[sbjR, 1] = Console.ReadLine();
-						}
-					}	
-				}
-				std[i].setSubjects(temp);
-
-				AutoIndexing++;
+				Student[] newStudent = cStudnt.addStudent(AutoInexing);
+				assignNewStudentToOldStudent(newStudent);
 			}
-			Console.WriteLine("Student Added succesfully...");
-			
-			students = std;
+			else if(type == 2)
+			{
+				Student[] newStudent= sStudnt.addStudent(AutoInexing);
+				assignNewStudentToOldStudent(newStudent);
+			}
+			else
+			{
+				Console.WriteLine("Please Select one of the selections");
+				Program.programOptionsImplementation(Console.ReadLine());
+			}
+			AutoInexing = students.Length;
 			Helper.goBackToMainMenu();
+		}
+		public void assignNewStudentToOldStudent(Student[] newStudent) {
+			students = Array.ConvertAll(Helper.Re2Dimension((Student[])students, students.GetLength(0) + newStudent.Length), o => (Student)o);
+			for (int i = AutoInexing, j = 0; j < newStudent.GetLength(0); i++, j++)
+			{
+				students[i] = newStudent[j];
+				if (newStudent.GetLength(0) - 1 == j)
+					Console.WriteLine("Student Added succesfully...");
+			}
 		}
 		private Student[] sortTopTenStudent(Student[] stds) {
 			Student temp;
@@ -245,7 +258,6 @@ namespace schoolSystem
 		}
 		public void addIntialStudent(Student[] stds) {
 			students = stds;
-			AutoIndexing = students.GetUpperBound(0);
 		}
 
 	}

@@ -6,9 +6,12 @@ namespace schoolSystem
 {
 	interface StdOperationInerface
 	{
-		void addStudent(Student[] std);
-	    void getStudents();
-		void getTopTenStudents();
+		public Student[] addStudent(int lastIndex);
+		
+
+		public void getStudents(Student[] students);
+		public void getTopTenStudents();
+		public int printCountOfStudent();
 
 	}
 }

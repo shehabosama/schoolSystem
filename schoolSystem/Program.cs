@@ -8,12 +8,14 @@ namespace schoolSystem
 		public static Teacher[] teachers;
 		public static Student stdRef;
 		public static ScholarshipStudent stdShcollerShipRef;
+		public static CreditStudent stdCreditStudentRef;
 		public static Teacher teacher;
 		static void Main(string[] args)
 		{
 			//FullTimeTeacher f = new FullTimeTeacher();
 			//PartTimeTeacher p = new PartTimeTeacher();
-		
+
+			//Console.WriteLine(new ScholarshipStudent().GetType().ToString());
 			init();
 			//Console.WriteLine(obj.GetType()==obj2.GetType());
 			//for (int i = 0; i < arr.Length; i++)
@@ -29,15 +31,15 @@ namespace schoolSystem
 
 		public static void init() {
 			students =new Student[12] {
-				new Student(1, "mohmed", "sdfsd", 1.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
+				new CreditStudent(1, "mohmed", "sdfsd", 1.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
 					{ "introduction to cs","pass"},
 					{ "operating system", "pass" } }) ,
 
-				new Student(2, "eslam", "sdfsd", 2.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
+				new CreditStudent(2, "eslam", "sdfsd", 2.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
 					{ "introduction to cs","pass"},
 					{ "operating system", "pass" } }),
 
-				new Student(3, "shaker", "sdfsd", 3.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
+				new CreditStudent(3, "shaker", "sdfsd", 3.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
 					{ "introduction to cs","pass"},
 					 { "operating system", "pass" } }),
 
@@ -84,12 +86,13 @@ namespace schoolSystem
 
 
 			stdShcollerShipRef = (ScholarshipStudent)students[3];
+			stdCreditStudentRef = (CreditStudent)students[0];
 			stdRef = students[0];
 			teacher = teachers[1];
 			stdRef.addIntialStudent(students);
 			teacher.initialTeachers(teachers);
 			Helper.programOptions();
-			Helper.spreateLine();
+			Helper.spreateLine(1);
 			programOptionsImplementation(Console.ReadLine());
 		}
 
@@ -99,43 +102,61 @@ namespace schoolSystem
 			{
 				case "1":
 					//Print All Students currently exist in the school
-					stdRef.getStudents();
+					stdRef.getStudents(3);
 					break;
 				case "2":
+					// Print Credit Student currently exist in the school
+					stdRef.getStudents(1);
+					break;
+				case "3":
+					//  Print Schollership Student currently exist in the school
+					stdRef.getStudents(2);
+					break;
+				case "4":
 					// Write the number of student and to get his degrees
 					Console.WriteLine("Please Enter Th number of students : ");
 					stdRef.getStudentSubjectsAndStatus(Convert.ToInt32(Console.ReadLine()));
 					break;
-				case "3":
-					// print all the students that have scholarship
+				case "5":
+					// Print Count of scholarship student currently exist in the school
 					Console.WriteLine("The count of Schollership Students is : " + stdShcollerShipRef.printCountOfStudent());
 					Helper.goBackToMainMenu();
 					break;
-				case "4":
+				case "6":
+					// Print Count of Credit students currently exist in the school
+					//Console.WriteLine("The count of Normal Student is : "+(students[0].printCountOfStudent() - stdShcollerShipRef.printCountOfStudent()));
+					Console.WriteLine("The count of Credit Student is : " + stdCreditStudentRef.printCountOfStudent());
+					Helper.goBackToMainMenu();
+					break;
+				case "7":
 					// get Top ten Student's degrees
 					stdRef.getTopTenStudents();
 					break;
-				case "5":
+				case "8":
 					// Add Student
-					stdRef.addStudent(students);
+					Console.WriteLine("What Type of Student you want to add ? ");
+					Console.WriteLine("1 -Credit Student ");
+					Console.WriteLine("2 -Schollership Student ");
+					int Studenttype = Convert.ToInt32(Console.ReadLine());
+					stdRef.addStudent(students, Studenttype);
 					break;
-				case "6":
+				case "9":
 					// Add Teacher
 					Console.WriteLine("What Type of Teacher you want to add ? ");
 					Console.WriteLine("1 -Full Time Teacher ");
 					Console.WriteLine("2 -Part Time Teacher ");
-					int type = Convert.ToInt32(Console.ReadLine());
-					teacher.addTeacher(teachers,type);
+					int Teachertype = Convert.ToInt32(Console.ReadLine());
+					teacher.addTeacher(teachers, Teachertype);
 					break;
-				case "7":
+				case "10":
 					// Print the salary one of teachers
 					Console.WriteLine("Please Enter Teacher Id : ");
 					int teacherId = Convert.ToInt32(Console.ReadLine());
 					teacher.getSpecificTeacherSalary(teacherId);
 					break;
-				case "8":
-					// Print the salary one of teachers
-					Console.WriteLine("The count of Normal Student is : "+(students[0].printCountOfStudent() - stdShcollerShipRef.printCountOfStudent()));
+				case "11":
+					// get teachers
+					teacher.getTeachers();
 					break;
 				default:
 					Console.Clear();

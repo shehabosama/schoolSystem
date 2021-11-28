@@ -12,6 +12,7 @@ namespace schoolSystem
 		private String[] subjects;
 		private Teacher[] teachers;
 		private TeacherOperations pTeacher, fTeacher;
+		private static int AutoInexing = 2;
 		
 		public Teacher() { }
 		public Teacher(int teacherId, string teacherName, string kunya, string[] subjects)
@@ -38,36 +39,64 @@ namespace schoolSystem
 		public void setTeacherSubjects(String[] teacherSubjects) {this.subjects = teacherSubjects;}
 		public String[] getTeacherSupjects() { return subjects; }
 		
-		public void addTeacher(Teacher[] teachers , int type) {
+		public void addTeacher(Teacher[] teach , int type) {
 
 			if (type == 1)
-				this.teachers = fTeacher.addTeacher(teachers);
-			else if (type == 2)
-				this.teachers = pTeacher.addTeacher(teachers);
-			else {
+			{
+
+				Teacher[] temp = fTeacher.addTeacher(AutoInexing);
+				teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + temp.Length), o => (Teacher)o);
+				for (int i = AutoInexing, j = 0; j < temp.GetLength(0); i++, j++)
+				{
+					teachers[i] = temp[j];
+					if (temp.GetLength(0) - 1 == j)
+						Console.WriteLine("Student Added succesfully...");
+				}
+			}
+			else if (type == 2) {
+				Teacher[] temp = pTeacher.addTeacher(AutoInexing);
+				teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + temp.Length), o => (Teacher)o);
+				for (int i = AutoInexing, j = 0; j < temp.GetLength(0); i++, j++)
+				{
+					teachers[i] = temp[j];
+					if (temp.GetLength(0) - 1 == j)
+						Console.WriteLine("Student Added succesfully...");
+				}
+			}
+				
+			else
+			{
 				Console.WriteLine("Please Select one of the selections");
 				Program.programOptionsImplementation(Console.ReadLine());
 			}
+			AutoInexing = teachers.Length;
+
 			Helper.goBackToMainMenu();
 
 		}
 		public void getSpecificTeacherSalary(int teacherId) {
 			for (int i = 0; i < teachers.GetLength(0); i++) {
-
+				Helper.spreateLine(2);
 				if (teacherId == teachers[i].getTeacherID())
 				{
+					
 					TeacherOperations teacher = (TeacherOperations)teachers[i];
-					Console.WriteLine(teacher.getSpecificTeacherSalary(teacherId));
+					Console.WriteLine("Teacher Name   : "+teachers[i].getTeacherName());
+					Console.WriteLine("Teacher Salary : " + teacher.getSpecificTeacherSalary(teacherId));
 				}
 			}
 			Helper.goBackToMainMenu();
 		}
 		public void getTeachers() {
 			for (int i = 0; i < teachers.GetLength(0); i++)
-				Console.WriteLine(teachers[i].getTeacherName());
-
+			{
+				Helper.spreateLine(2);
+				Console.WriteLine("Teacher ID     : " + teachers[i].getTeacherID()
+						      + "\nTeacher Name   : " + teachers[i].getTeacherName());
+			}
 			Helper.goBackToMainMenu();
 		}
 
+		
 	}
 }

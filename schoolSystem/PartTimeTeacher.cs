@@ -7,7 +7,6 @@ namespace schoolSystem
 	class PartTimeTeacher : Teacher , TeacherOperations
 	{
 		private float countOfHours;
-		private static int AutoIndexing = 2;
 		private PartTimeTeacher[] pTeachers;
 		public PartTimeTeacher()
 		{
@@ -30,24 +29,22 @@ namespace schoolSystem
 			Console.WriteLine("getSpecificTeacherSalary : PartTimeTeacher");
 		}
 
-	    public Teacher[] addTeacher(Teacher[] teachers)
+	    public Teacher[] addTeacher(int lastIndex)
 		{
+			Teacher[] teachers;
 			int teacherNo = 0;
 			Console.WriteLine("How many Teacher you want to add ? ");
 			int teacherSize = Convert.ToInt32(Console.ReadLine());
-			teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + teacherSize), o => (Teacher)o);
-			
-			for (int i = AutoIndexing; i < teachers.GetLength(0); i++)
+			//	teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + teacherSize), o => (Teacher)o);
+			teachers = new Teacher[teacherSize];
+			for (int i = 0; i < teachers.GetLength(0); i++)
 			{
-				AutoIndexing = teachers.GetUpperBound(0);
 				Console.WriteLine("Enter The Teacher Number :" + ++teacherNo);
-				Console.WriteLine("Teacher Id Is : " + (AutoIndexing + 1));
-				
+				Console.WriteLine("Teacher Id Is : " + (lastIndex + 1));
 				Console.WriteLine("Enter Teacher Name");
 				String teacherName = Console.ReadLine();
 				Console.WriteLine("Enter Teacher kunya");
 				String kunya = Console.ReadLine();
-				
 				Console.WriteLine("How many hours he worked in part time ?");
 				float countOfHours = (float)Convert.ToDouble(Console.ReadLine());
 				Console.WriteLine("How many subjects he teach?");
@@ -59,9 +56,10 @@ namespace schoolSystem
 
 					temp[j] = Console.ReadLine();
 				}
-				teachers[i] = new PartTimeTeacher(AutoIndexing + 1, teacherName, kunya, temp, countOfHours);
+				teachers[i] = new PartTimeTeacher(lastIndex + 1, teacherName, kunya, temp, countOfHours);
+				lastIndex++;
 			}
-
+			
 			return teachers;
 		}
 
