@@ -43,25 +43,12 @@ namespace schoolSystem
 
 			if (type == 1)
 			{
-
 				Teacher[] temp = fTeacher.addTeacher(AutoInexing);
-				teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + temp.Length), o => (Teacher)o);
-				for (int i = AutoInexing, j = 0; j < temp.GetLength(0); i++, j++)
-				{
-					teachers[i] = temp[j];
-					if (temp.GetLength(0) - 1 == j)
-						Console.WriteLine("Student Added succesfully...");
-				}
+				assignNewStudentToOldStudent(temp);
 			}
 			else if (type == 2) {
 				Teacher[] temp = pTeacher.addTeacher(AutoInexing);
-				teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + temp.Length), o => (Teacher)o);
-				for (int i = AutoInexing, j = 0; j < temp.GetLength(0); i++, j++)
-				{
-					teachers[i] = temp[j];
-					if (temp.GetLength(0) - 1 == j)
-						Console.WriteLine("Student Added succesfully...");
-				}
+				assignNewStudentToOldStudent(temp);
 			}
 				
 			else
@@ -73,6 +60,17 @@ namespace schoolSystem
 
 			Helper.goBackToMainMenu();
 
+		}
+
+		public void assignNewStudentToOldStudent(Teacher[] newTeacher)
+		{
+			teachers = Array.ConvertAll(Helper.Re2Dimension(teachers, teachers.GetLength(0) + newTeacher.Length), o => (Teacher)o);
+			for (int i = AutoInexing, j = 0; j < newTeacher.GetLength(0); i++, j++)
+			{
+				teachers[i] = newTeacher[j];
+				if (newTeacher.GetLength(0) - 1 == j)
+					Console.WriteLine("Student Added succesfully...");
+			}
 		}
 		public void getSpecificTeacherSalary(int teacherId) {
 			for (int i = 0; i < teachers.GetLength(0); i++) {

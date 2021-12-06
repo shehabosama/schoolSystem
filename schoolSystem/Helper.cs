@@ -6,6 +6,7 @@ namespace schoolSystem
 {
 	class Helper
 	{
+		
 		public static Object[] Re2Dimension(Object[] OldArray, int arr1stDimLength)
 		{
 			// declare a larger array

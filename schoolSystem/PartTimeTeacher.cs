@@ -26,7 +26,7 @@ namespace schoolSystem
 		public float getSpecificTeacherSalary(int teacherId)
 		{
 			return calculateTheSallary();
-			Console.WriteLine("getSpecificTeacherSalary : PartTimeTeacher");
+		
 		}
 
 	    public Teacher[] addTeacher(int lastIndex)

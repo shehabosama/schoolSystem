@@ -10,7 +10,7 @@ namespace schoolSystem
 		
 
 		public void getStudents(Student[] students);
-		public void getTopTenStudents();
+		
 		public int printCountOfStudent();
 
 	}

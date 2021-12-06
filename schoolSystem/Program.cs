@@ -12,26 +12,14 @@ namespace schoolSystem
 		public static Teacher teacher;
 		static void Main(string[] args)
 		{
-			//FullTimeTeacher f = new FullTimeTeacher();
-			//PartTimeTeacher p = new PartTimeTeacher();
-
-			//Console.WriteLine(new ScholarshipStudent().GetType().ToString());
 			init();
-			//Console.WriteLine(obj.GetType()==obj2.GetType());
-			//for (int i = 0; i < arr.Length; i++)
-			//Console.WriteLine(arr[i].GetType() == new ScholarshipStudent().GetType());
-			//ScholarshipStudent st = (ScholarshipStudent)arr[3];
-			//Console.WriteLine(arr[0].printCountOfStudent()- st.printCountOfStudent());
-			//Console.WriteLine(st.printCountOfStudent());
-			//Student stt = new Student();S
-			//stt.getTopTenStudents(arr);
-			//Student.addEmployee(arr);
-	
 		}
 
 		public static void init() {
+			
 			students =new Student[12] {
-				new CreditStudent(1, "mohmed", "sdfsd", 1.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
+				
+				new CreditStudent(1, "mohmed", "samer", 1.2f, "cs", "11-10-1997", "20-2-2021", "2-6-2020", 1, new String[,]{
 					{ "introduction to cs","pass"},
 					{ "operating system", "pass" } }) ,
 
