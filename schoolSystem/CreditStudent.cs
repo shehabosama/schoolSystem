@@ -60,66 +60,7 @@ namespace schoolSystem
 		public int printCountOfStudent() { 
 			return countOfStudent;
 		}
-		/*	public Student[] addStudent(Student[] std)
-			{
-
-
-				int stdNo = 0;
-				Console.WriteLine("How many Student you want to add ?  "  + AutoIndexing);
-				 studentSize += Convert.ToInt32(Console.ReadLine());
-				std = Array.ConvertAll(Helper.Re2Dimension((Student[])std, std.GetLength(0) + studentSize), o => (Student)o);
-
-				for (int i = AutoIndexing; i <std.GetLength(0); i++)
-				{
-					Console.WriteLine(AutoIndexing + " " + std.GetLength(0));
-					Console.WriteLine("Enter The Studnet Number :" + ++stdNo);
-					Console.WriteLine("Student Id Is : " + (AutoIndexing + 1));
-					Console.WriteLine("Enter Student Name");
-					String studentName = Console.ReadLine();
-					Console.WriteLine("Enter Student Kunya");
-					String kunya = Console.ReadLine();
-					Console.WriteLine("Enter Student Birth Date");
-					String StudentBirthDate = Console.ReadLine();
-					Console.WriteLine("Enter Student Attending Date");
-					String StudentAttendingDate = Console.ReadLine();
-					Console.WriteLine("Enter Student Current Studying Year");
-					int currentStudyingYear = Convert.ToInt32(Console.ReadLine());
-					Console.WriteLine("Enter Student Department");
-					String department = Console.ReadLine();
-					Console.WriteLine("Enter Stuent Jpa");
-					float jpa = (float)Convert.ToDouble(Console.ReadLine());
-					Console.WriteLine("Enter Student Graduation Date");
-					String graduationDate = Console.ReadLine();
-					Console.WriteLine("Enter how many subjects it has?");
-					int subjectCount = Convert.ToInt32(Console.ReadLine());
-					String[,] temp = new string[subjectCount, 2];
-					for (int sbjR = 0; sbjR < subjectCount; sbjR++)
-					{
-						for (int sbjC = 0; sbjC < 2; sbjC++)
-						{
-							if (sbjC == 0)
-							{
-								Console.WriteLine("Enter the student subject");
-								temp[sbjR, 0] = Console.ReadLine();
-							}
-							else
-							{
-								Console.WriteLine("Enter if it pass or fail");
-								temp[sbjR, 1] = Console.ReadLine();
-							}
-						}
-
-					}
-
-					std[i] = new CreditStudent(AutoIndexing + 1, studentName, kunya, jpa, department, StudentBirthDate, StudentAttendingDate, graduationDate, currentStudyingYear, temp);
-					Console.WriteLine("Student Added succesfully...");
-					AutoIndexing++;
-
-				}
-
-				Console.WriteLine(std.Length);
-				return std;
-			}*/
+	
 
 		public Student[] addStudent(int lastIndex)
 		{
